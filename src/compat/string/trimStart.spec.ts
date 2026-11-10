@@ -23,6 +23,13 @@ describe('trimStart', () => {
     expect(func(object)).toBe(expected);
   });
 
+  it(`\`trimStart\` should convert \`string\` to a string like lodash`, () => {
+    expect(func([null, 'a'] as any)).toBe('null,a');
+    expect(func([1, [2, undefined]] as any)).toBe('1,2,undefined');
+    expect(func(-0 as any)).toBe('-0');
+    expect(func(123 as any, '1')).toBe('23');
+  });
+
   it(`\`trimStart\` should remove leading \`chars\``, () => {
     const string = '-_-a-b-c-_-';
     const expected = `a-b-c${'-_-'}`;

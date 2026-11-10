@@ -95,6 +95,12 @@ describe('truncate', () => {
     expect(truncate({ toString: constant(string) }, { length: 5 })).toBe('hi...');
   });
 
+  it('should convert `string` to a string like lodash', () => {
+    expect(truncate([null, 'a'] as any)).toBe('null,a');
+    expect(truncate(-0 as any)).toBe('-0');
+    expect(truncate(Symbol('a') as any)).toBe('Symbol(a)');
+  });
+
   it('should work as an iteratee for methods like `_.map`', () => {
     const actual = map([string, string, string], truncate);
     const truncated = 'hi-diddly-ho there, neighbo...';

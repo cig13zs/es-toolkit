@@ -1,5 +1,6 @@
 import { regexMultiByte } from '../_internal/regexMultiByte.ts';
 import { isObject } from '../predicate/isObject.ts';
+import { toString } from '../util/toString.ts';
 
 type TruncateOptions = {
   length?: number;
@@ -36,7 +37,7 @@ type TruncateOptions = {
  * const truncatedStr8 = truncate('¥§✈✉🤓', { length: 4, omission: '…' }) // returns '¥§✈…'
  */
 export function truncate(string?: string, options?: TruncateOptions): string {
-  string = string != null ? `${string}` : '';
+  string = toString(string);
 
   let length = 30;
   let omission = '...';

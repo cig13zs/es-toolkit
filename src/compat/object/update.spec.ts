@@ -142,6 +142,17 @@ describe('update', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should return primitive `object` values as-is', () => {
+    const values = [0, 1, 'a', true, Symbol('a')];
+
+    each(values, value => {
+      // @ts-expect-error
+      expect(update(value, 'a.b', updater)).toBe(value);
+      // @ts-expect-error
+      expect(update(value, ['a', 'b'], updater)).toBe(value);
+    });
+  });
+
   it('should overwrite primitives in the path', () => {
     each(['a.b', ['a', 'b']], path => {
       const object = { a: '' };

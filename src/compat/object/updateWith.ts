@@ -93,6 +93,10 @@ export function updateWith<T extends object, R>(
 
   const updateValue = updater(get(obj, resolvedPath));
 
+  if (!isObject(obj)) {
+    return obj;
+  }
+
   let current: any = obj;
 
   for (let i = 0; i < resolvedPath.length && current != null; i++) {

@@ -222,6 +222,15 @@ describe('set', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`\`set\` should return primitive \`object\` values as-is`, () => {
+    const values = [0, 1, 'a', true, Symbol('a')];
+
+    each(values, (value: any) => {
+      expect(set(value, 'a.b', 1)).toBe(value);
+      expect(set(value, ['a', 'b'], 1)).toBe(value);
+    });
+  });
+
   it(`\`set\` should overwrite primitives in the path`, () => {
     each(['a.b', ['a', 'b']], path => {
       const object = { a: '' };
